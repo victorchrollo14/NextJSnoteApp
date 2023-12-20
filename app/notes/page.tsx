@@ -1,7 +1,7 @@
 import { Note } from "../../components/Note";
 import CreateNote from "./CreateNote";
 
-interface notes {
+export interface note {
   id: string;
   title: string;
   description: string;
@@ -21,7 +21,7 @@ const getNotes = async () => {
 };
 
 export default async function NotesPage() {
-  const notes: notes[] = await getNotes();
+  const notes: note[] = await getNotes();
 
   console.log(notes);
 
@@ -36,15 +36,7 @@ export default async function NotesPage() {
           <CreateNote />
         </div>
         <ul className="flex flex-row flex-wrap justify-center items-center gap-2 w-3/4 h-auto">
-          {notes &&
-            notes?.map((note) => (
-              <Note
-                id={note.id}
-                title={note.title}
-                description={note.description}
-                time={note.time}
-              />
-            ))}
+          {notes && notes?.map((note) => <Note key={note.id} note={note} />)}
         </ul>
       </div>
     </div>

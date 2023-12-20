@@ -1,10 +1,13 @@
 "use client";
 
 import React, { FormEvent, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const CreateNote = () => {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
+
+  const router = useRouter();
 
   const create = async (e: FormEvent) => {
     e.preventDefault();
@@ -22,6 +25,7 @@ const CreateNote = () => {
 
     setContent("");
     setTitle("");
+    router.refresh();
   };
 
   return (
