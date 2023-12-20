@@ -1,10 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  apiRoutes: [
-    {
-      handler: "./api/notes.js",
-    },
-  ],
-};
+const nextConfig = {};
 
 module.exports = nextConfig;
