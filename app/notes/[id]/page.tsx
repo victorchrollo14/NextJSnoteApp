@@ -1,9 +1,12 @@
 import { note } from "../page";
 import { Note } from "@/components/Note";
+import { Edit } from "./Edit";
 
 const getNotes = async (noteId: any) => {
   try {
-    const res = await fetch(`http://localhost:3001/api/notes/${noteId}`);
+    const res = await fetch(`http://localhost:3001/api/notes/${noteId}`, {
+      cache: "no-cache",
+    });
     const data = await res.json();
 
     if (res.status !== 200) return null;
@@ -19,14 +22,16 @@ const NotePage = async ({ params }: any) => {
 
   return (
     <>
+      {!note && (
+        <p className="font-bold font-mono text-5xl text-red-500 text-center mt-40">
+          404 | Note Not Found
+        </p>
+      )}
       {note && (
         <>
           <h1 className="font-mono font-bold text-4xl">Notes/{noteId}</h1>
           <Note key={note.id} note={note} />
-          <div className="mt-2">
-            <button className="edit bg-yellow-400 text-black mr-3">edit</button>
-            <button className="delete bg-red-600">delete</button>
-          </div>
+          <Edit note={note}/>
         </>
       )}
     </>
